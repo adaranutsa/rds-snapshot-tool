@@ -170,6 +170,10 @@ def filter_instances(pattern, instance_list):
     filtered_list = []
 
     for instance in instance_list['DBInstances']:
+        
+        # If the DB is not 'available', skip it
+        if instance['DBInstanceStatus'] != 'available':
+            continue
 
         if pattern == 'ALL_INSTANCES' and instance['Engine'] in _SUPPORTED_ENGINES:
             filtered_list.append(instance)
